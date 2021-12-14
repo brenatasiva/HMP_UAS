@@ -19,9 +19,9 @@ if (isset($username) && isset($follow)) {
     if ($stmt->affected_rows > 0) {
         $arr = ["result" => "success"];
     } else {
-        $arr = ["result" => "error", "message" => "Fail to insert collection"];
+        $arr = ["result" => "error", "message" => "Fail to unfollow."];
     }
 } else {
-    $arr = ["result" => "error", "message" => "Fail to collect the post"];
+    $arr = ["result" => "error", "message" => "Fail to collect the POST parameters."];
 }
 echo json_encode($arr);
