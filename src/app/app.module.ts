@@ -17,9 +17,9 @@ import { SearchComponent } from './search/search.component';
 
 import { FormsModule } from '@angular/forms';
 
-import {HttpClientModule} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
-import {IonicStorageModule} from '@ionic/storage-angular';
+import { IonicStorageModule } from '@ionic/storage-angular';
 
 import { Camera } from '@ionic-native/camera/ngx';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -29,32 +29,34 @@ import { PostService } from './post.service';
 
 //Pembuatan routes
 const appRoutes: Routes = [
+  { path: 'home', component: PostComponent },
+  { path: '' , redirectTo:'home',pathMatch:'full'},
   { path: 'signup', component: SignupComponent },
-  { path: 'post', component: PostComponent },
   { path: 'detailpost/:idpost', component: DetailpostComponent },
   { path: 'search', component: SearchComponent },
-  { path: 'profile/:username', component: ProfileComponent },
-  { path: 'detailfollow/:type/:username', component: DetailpostComponent },
-  { path: 'activity/:username', component: ActivityComponent },
+  { path: 'profile', component: ProfileComponent },
+  { path: 'detailfollow/:type/', component: DetailpostComponent },
+  { path: 'activity', component: ActivityComponent },
   { path: 'collection', component: CollectionComponent },
   { path: 'detailcollection/:idcollection', component: DetailcollectionComponent },
 ];
 
 @NgModule({
   declarations: [AppComponent, SignupComponent, PostComponent,
-                DetailpostComponent, SearchComponent, ProfileComponent,
-                ActivityComponent, CollectionComponent, DetailcollectionComponent],
+    DetailpostComponent, SearchComponent, ProfileComponent,
+    ActivityComponent, CollectionComponent, DetailcollectionComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), RouterModule.forRoot(appRoutes),  AppRoutingModule,
+  imports: [HttpClientModule, BrowserModule, IonicModule.forRoot(), IonicStorageModule.forRoot(),RouterModule.forRoot(appRoutes),
+    AppRoutingModule, FormsModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
-    enabled: environment.production,
-    // Register the ServiceWorker as soon as the app is stable
-    // or after 30 seconds (whichever comes first).
-    registrationStrategy: 'registerWhenStable:30000'
-  })
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the app is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    })
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-              Camera, PostService],
+    Camera, PostService],
   bootstrap: [AppComponent],
 })
 export class AppModule { }
