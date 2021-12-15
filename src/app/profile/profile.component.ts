@@ -12,6 +12,29 @@ export class ProfileComponent implements OnInit {
 
   profile = [];
 
+  post = 'unhide'
+  following = 'hide'
+  followers = 'hide'
+
+  hideElmt(hide) {
+    // this.post = 'hide'
+    if (hide == 'post') {
+      this.post = 'unhide'
+      this.following = 'hide'
+      this.followers = 'hide'
+    }
+    else if (hide == 'following') {
+      this.following = 'unhide'
+      this.followers = 'hide'
+      this.post = 'hide'
+    }
+    else if(hide == 'followers') {
+      this.followers = 'unhide'
+      this.following = 'hide' 
+      this.post = 'hide'
+    }
+  }
+
   constructor(public u: UserService, private storage: Storage) { }
 
   async ngOnInit() {
