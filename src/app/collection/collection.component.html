@@ -1,3 +1,21 @@
-<p>
-  collection works!
-</p>
+<ion-card *ngFor="let c of collections; let i = index">
+  <ion-card-content routerLink="/detailcollection/{{ c.idcollection }}">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="3" class="ion-align-self-center ion-text-center"
+          ><ion-icon name="library" size="large"></ion-icon
+        ></ion-col>
+        <ion-col>
+          <h2>{{ c.nama_collection }}</h2>
+          <p>Made by {{ c.username }}</p>
+        </ion-col>
+        <ion-col size="3" class="ion-align-self-center ion-text-center">
+          <h2>
+            <b>{{ c.idcollection }}</b>
+          </h2>
+          <p>post(s)</p>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>
