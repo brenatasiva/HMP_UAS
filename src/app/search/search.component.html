@@ -1,3 +1,6 @@
 <p>
-  search works!
+  <ion-searchbar
+    [(ngModel)]="search"
+    (ionInput)="findUser($event)"
+  ></ion-searchbar>
 </p>

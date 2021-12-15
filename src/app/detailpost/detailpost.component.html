@@ -1,3 +1,49 @@
-<p>
-  detailpost works!
-</p>
+<ion-card>
+  <ion-card-header>
+    <ion-item style="margin-left: -15px; padding-bottom: 15px">
+      <ion-avatar slot="start" style="width: 30px; height: 30px">
+        <img
+          src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y"
+        />
+      </ion-avatar>
+      <ion-label>{{ data.username }}</ion-label>
+    </ion-item>
+    <ion-img
+      src="https://ionicframework.com/docs/demos/api/card/madison.jpg"
+    ></ion-img>
+    <ion-card-title
+      ><ion-icon name="heart"></ion-icon> {{ likes }}</ion-card-title
+    >
+  </ion-card-header>
+
+  <ion-card-content>
+    {{ data.caption }}
+  </ion-card-content>
+  <ion-item>
+    <h4 style="padding-left: 1%; padding-right: 10px; padding-bottom: 5px">
+      Comment :
+    </h4>
+    <ion-input type="text" [(ngModel)]="textComment"></ion-input>
+    <div (click)="addComment()"><ion-icon name="send-outline"></ion-icon></div>
+  </ion-item>
+
+  <ion-list>
+    <ion-item *ngFor="let comment of comments">
+      <ion-avatar slot="start">
+        <img
+          src="https://ionicframework.com/docs/demos/api/list/avatar-finn.png"
+        />
+      </ion-avatar>
+      <ion-label>
+        <h2>{{ comment.username }}</h2>
+        <p>{{ comment.comment }}</p>
+      </ion-label>
+      <div
+        *ngIf="comment.username == username"
+        (click)="deleteComment(comment.idaction)"
+      >
+        <ion-icon name="trash-outline"></ion-icon>
+      </div>
+    </ion-item>
+  </ion-list>
+</ion-card>

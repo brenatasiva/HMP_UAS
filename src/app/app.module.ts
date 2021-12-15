@@ -26,37 +26,56 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { PostService } from './post.service';
 
-
 //Pembuatan routes
 const appRoutes: Routes = [
   { path: 'home', component: PostComponent },
-  { path: '' , redirectTo:'home',pathMatch:'full'},
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'signup', component: SignupComponent },
   { path: 'detailpost/:idpost', component: DetailpostComponent },
   { path: 'search', component: SearchComponent },
-  { path: 'profile', component: ProfileComponent },
-  { path: 'detailfollow/:type/', component: DetailpostComponent },
+  { path: 'profile/:username', component: ProfileComponent },
+  { path: 'detailfollow/:type', component: DetailpostComponent },
   { path: 'activity', component: ActivityComponent },
   { path: 'collection', component: CollectionComponent },
-  { path: 'detailcollection/:idcollection', component: DetailcollectionComponent },
+  {
+    path: 'detailcollection/:idcollection',
+    component: DetailcollectionComponent,
+  },
 ];
 
 @NgModule({
-  declarations: [AppComponent, SignupComponent, PostComponent,
-    DetailpostComponent, SearchComponent, ProfileComponent,
-    ActivityComponent, CollectionComponent, DetailcollectionComponent],
+  declarations: [
+    AppComponent,
+    SignupComponent,
+    PostComponent,
+    DetailpostComponent,
+    SearchComponent,
+    ProfileComponent,
+    ActivityComponent,
+    CollectionComponent,
+    DetailcollectionComponent,
+  ],
   entryComponents: [],
-  imports: [HttpClientModule, BrowserModule, IonicModule.forRoot(), IonicStorageModule.forRoot(),RouterModule.forRoot(appRoutes),
-    AppRoutingModule, FormsModule,
+  imports: [
+    HttpClientModule,
+    BrowserModule,
+    IonicModule.forRoot(),
+    IonicStorageModule.forRoot(),
+    RouterModule.forRoot(appRoutes),
+    AppRoutingModule,
+    FormsModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the app is stable
       // or after 30 seconds (whichever comes first).
-      registrationStrategy: 'registerWhenStable:30000'
-    })
+      registrationStrategy: 'registerWhenStable:30000',
+    }),
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    Camera, PostService],
+  providers: [
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    Camera,
+    PostService,
+  ],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
