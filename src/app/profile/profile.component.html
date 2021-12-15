@@ -1,3 +1,33 @@
-<p>
-  profile works!
-</p>
+<ion-card>
+    <ion-card-content>
+        <ion-chip>{{profile.username}}</ion-chip>
+        <div *ngIf="profile.posts">
+            <h4><b>{{profile.posts.length}} posts</b></h4>
+            <ion-chip *ngFor="let post of profile.posts;">
+                <p>{{post.caption}}</p>
+            </ion-chip>
+        </div>
+
+        <div *ngIf="profile.following">
+            <h4><b>{{profile.following.length}} following</b></h4>
+            <ion-chip *ngFor="let pro of profile.following;">
+                <p>{{pro.following}}</p>
+            </ion-chip>
+        </div>
+
+        <div *ngIf="profile.followers">
+            <h4><b>{{profile.followers.length}} followers</b></h4>
+            <ion-chip *ngFor="let pro of profile.followers;">
+                <p>{{pro.username}}</p>
+            </ion-chip>
+        </div>
+
+        <div *ngIf="profile.likes">
+            <h4><b>{{profile.likes.length}} likes</b></h4>
+            <ion-chip *ngFor="let pro of profile.likes;">
+                <p>{{pro.username}}</p>
+                <p>{{pro.caption}}</p>
+            </ion-chip>
+        </div>
+    </ion-card-content>
+</ion-card>

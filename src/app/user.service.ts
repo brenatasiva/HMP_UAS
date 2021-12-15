@@ -15,7 +15,7 @@ export class UserService {
   showProfile(username: string): Observable<any> {
     let body = new HttpParams();
     body = body.set('username', username);
-    return this.http.get('https://ubaya.fun/hybrid/160419144/hmp_uas/users/showprofile.php');
+    return this.http.post('https://ubaya.fun/hybrid/160419144/hmp_uas/users/showprofile.php', body);
   }
 
   signUp(user: UserModel, url: string): Observable<any> {
