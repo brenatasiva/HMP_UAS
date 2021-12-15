@@ -11,9 +11,23 @@
     <ion-img
       src="https://ionicframework.com/docs/demos/api/card/madison.jpg"
     ></ion-img>
-    <ion-card-title
-      ><ion-icon name="heart"></ion-icon> {{ likes }}</ion-card-title
-    >
+    <ion-grid>
+      <ion-row>
+        <ion-col class="ion-align-self-left ion-text-left">
+          <div *ngIf="status != 'liked'" (click)="like()">
+            <ion-icon name="heart-outline"></ion-icon>
+            {{ likes }}
+          </div>
+          <div *ngIf="status == 'liked'" (click)="unlike()">
+            <ion-icon name="heart"></ion-icon>
+            {{ likes }}
+          </div>
+        </ion-col>
+        <ion-col class="ion-align-self-right ion-text-right">
+          <ion-icon name="bookmark-outline"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </ion-card-header>
 
   <ion-card-content>

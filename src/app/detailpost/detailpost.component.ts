@@ -23,6 +23,7 @@ export class DetailpostComponent implements OnInit {
   likes = 0;
   id: number = 0;
   textComment = '';
+  status = '';
 
   async ngOnInit() {
     this.id = this.route.snapshot.params.idpost;
@@ -32,10 +33,11 @@ export class DetailpostComponent implements OnInit {
   }
 
   detailPosts() {
-    this.ps.detailPost(this.id).subscribe((data) => {
+    this.ps.detailPost(this.id, this.username).subscribe((data) => {
       this.data = data.data;
       this.likes = data.data.likes;
       this.comments = data.data.comments;
+      this.status = data.data.status;
       console.log(data.data);
     });
   }
@@ -52,6 +54,24 @@ export class DetailpostComponent implements OnInit {
   deleteComment(id: number) {
     this.ps
       .deleteAction('Comment', this.id, this.username, id)
+      .subscribe((data) => {
+        if (data.result == 'success') this.detailPosts();
+        else console.log(data.message);
+      });
+  }
+
+  like() {
+    this.ps
+      .insertAction('Like', null, this.id, this.username)
+      .subscribe((data) => {
+        if (data.result == 'success') this.detailPosts();
+        else console.log(data.message);
+      });
+  }
+
+  unlike() {
+    this.ps
+      .deleteAction('Like', this.id, this.username, null)
       .subscribe((data) => {
         if (data.result == 'success') this.detailPosts();
         else console.log(data.message);

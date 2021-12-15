@@ -24,17 +24,16 @@ export class PostService {
     let body = new HttpParams();
     body = body.set('caption', post.caption);
     body = body.set('username', post.username);
-    body = body.set('date', post.date);
-    body = body.set('url', post.url);
     return this.http.post(
       'https://ubaya.fun/hybrid/160419144/hmp_uas/posts/insertpost.php',
       body
     );
   }
 
-  detailPost(idpost: number): Observable<any> {
+  detailPost(idpost: number, username: string): Observable<any> {
     let body = new HttpParams();
     body = body.set('idpost', idpost);
+    body = body.set('username', username);
     return this.http.post(
       'https://ubaya.fun/hybrid/160419144/hmp_uas/posts/detailpost.php',
       body

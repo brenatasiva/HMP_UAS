@@ -14,6 +14,7 @@ import { DetailcollectionComponent } from './detailcollection/detailcollection.c
 import { DetailpostComponent } from './detailpost/detailpost.component';
 import { PostComponent } from './post/post.component';
 import { SearchComponent } from './search/search.component';
+import { FormpostComponent } from './formpost/formpost.component';
 
 import { FormsModule } from '@angular/forms';
 
@@ -54,6 +55,7 @@ const appRoutes: Routes = [
     ActivityComponent,
     CollectionComponent,
     DetailcollectionComponent,
+    FormpostComponent
   ],
   entryComponents: [],
   imports: [
