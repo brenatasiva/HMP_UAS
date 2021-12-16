@@ -53,6 +53,25 @@ export class FormprofileComponent implements OnInit {
     console.log('onDidDismiss resolved with role', role);
   }
 
+  async presentAlertConfirm(message) {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Confirm!',
+      message: message,
+      buttons: [
+        {
+          text: 'Okay',
+          id: 'confirm-button',
+          handler: () => {
+            console.log('Confirm Okay');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
   ngOnInit() {
     this.username = this.route.snapshot.params['username'];
     this.us.showProfile(this.username).subscribe((data) => {
@@ -65,7 +84,12 @@ export class FormprofileComponent implements OnInit {
       this.bio = arrdata['bio'];
       this.email = arrdata['email'];
       this.tanggal_lahir = arrdata['tanggal_lahir'];
-      this.url = arrdata['url'];
+      if (arrdata['url'] == null) {
+        this.url = '';
+      }
+      else{
+        this.url = "https://ubaya.fun/hybrid/160419144/hmp_uas/users/images/"+arrdata['url'];
+      }
     });
   }
   options: CameraOptions = {
@@ -108,7 +132,7 @@ export class FormprofileComponent implements OnInit {
         if (data.result == 'success') {
           this.presentAlert();
         } else {
-          console.log(data);
+          this.presentAlertConfirm(data.message);
         }
       });
   }
