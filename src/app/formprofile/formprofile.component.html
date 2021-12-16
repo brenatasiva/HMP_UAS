@@ -1,0 +1,77 @@
+<ion-content>
+    <ion-title class="ion-text-center ion-no-padding">
+        <h3>Sign Up</h3>
+    </ion-title>
+    <ion-card>
+        <ion-item>
+            <ion-input name="nama" type="text" placeholder="Nama" [(ngModel)]="signName">
+            </ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-input name="username" type="text" placeholder="Username" [(ngModel)]="signUsername">
+            </ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-input name="password" type="password" placeholder="Password" [(ngModel)]="signPassword">
+            </ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-input name="location" type="text" placeholder="Location (optional)" [(ngModel)]="signLokasi">
+            </ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-input name="bio" type="text" placeholder="Bio (optional)" [(ngModel)]="signBio">
+            </ion-input>
+        </ion-item>
+        <ion-list>
+            <ion-radio-group [(ngModel)]="signGender">
+                <ion-list-header>
+                    <ion-label>
+                        <h4>Gender</h4>
+                    </ion-label>
+                </ion-list-header>
+                <ion-item>
+                    <ion-label>Laki-laki</ion-label>
+                    <ion-radio value="Laki" checked></ion-radio>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Perempuan</ion-label>
+                    <ion-radio value="Perempuan"></ion-radio>
+                </ion-item>
+            </ion-radio-group>
+        </ion-list>
+        <ion-list>
+            <ion-list-header>
+                <ion-label>
+                    <h4>Birth Date</h4>
+                </ion-label>
+            </ion-list-header>
+            <ion-item>
+                <ion-input name="date" type="text" placeholder="DD/MM/YYYY" [(ngModel)]="signTanggal">
+                </ion-input>
+            </ion-item>
+        </ion-list>
+        <ion-list>
+            <ion-list-header>
+                <ion-label>
+                    <h4>Profile Picture (optional)</h4>
+                </ion-label>
+            </ion-list-header>
+            <ion-item>
+                <ion-img src="{{signUrl}}">
+                </ion-img>
+                <ion-button (click)="ambilFoto()">
+                    <ion-icon name="camera"></ion-icon>
+                </ion-button>
+            </ion-item>
+        </ion-list>
+        <ion-text class="ion-text-center">
+            <p *ngIf="statusSignUp">
+                <ion-chip>{{ statusSignUp }}</ion-chip>
+            </p>
+        </ion-text>
+        <ion-button type="submit" expand="block" (click)="signup()">Sign Up</ion-button>
+    </ion-card>
+    <ion-title (click)="changeSignIn()" class="ion-text-center ion-margin-bottom">
+        <h4>Already have account? <b>Sign In</b></h4>
+    </ion-title>

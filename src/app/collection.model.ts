@@ -1,5 +1,4 @@
 export class CollectionModel {
-    
     public idcollection: number;
     public namaCollection: string;
     public username: string;

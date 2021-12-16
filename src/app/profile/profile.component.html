@@ -1,115 +1,93 @@
 <ion-content>
-  <div class="card">
-    <div class="header">
-      <div class="avatar">
-        <ion-avatar>
-          <img
-            src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y"
-            alt=""
-          />
-        </ion-avatar>
-      </div>
-      <!-- <ion-text color="dark">
-          <h2 style="text-align: center;">{{ profile.username }}</h2>
-        </ion-text> -->
-      <ion-text color="dark">
-        <h2 style="text-align: center">{{ profile.nama }}</h2>
-      </ion-text>
-    </div>
-    <ion-grid>
-      <ion-row>
-        <ion-col size="4">
-          <ion-item (click)="hideElmt('post')"
-            >Posts({{ profile.posts ? profile.posts.length : "" }})</ion-item
-          >
-        </ion-col>
-        <ion-col size="4">
-          <ion-item (click)="hideElmt('following')"
-            >Following({{
-              profile.following ? profile.following.length : 0
-            }})</ion-item
-          >
-        </ion-col>
-        <ion-col size="4">
-          <ion-item (click)="hideElmt('followers')"
-            >Followers({{
-              profile.followers ? profile.followers.length : 0
-            }})</ion-item
-          >
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-    <div *ngIf="post == 'unhide'">
-      <!-- <ion-card *ngFor="let post of profile.posts">
+    <div class="card">
+        <div class="header">
+            <div class="avatar">
+                <ion-avatar>
+                    <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y" alt="" />
+                </ion-avatar>
+            </div>
+            <ion-text color="dark">
+                <h2 style="text-align: center;">{{ profile.username }}</h2>
+            </ion-text>
+            <ion-text color="dark">
+                <h2 style="text-align: center">{{ profile.nama }}</h2>
+            </ion-text>
+        </div>
+        <ion-grid>
+            <ion-row>
+                <ion-col size="4">
+                    <ion-item (click)="hideElmt('post')">Posts({{ profile.posts ? profile.posts.length : "" }})</ion-item>
+                </ion-col>
+                <ion-col size="4">
+                    <ion-item (click)="hideElmt('following')">Following({{ profile.following ? profile.following.length : 0 }})
+                    </ion-item>
+                </ion-col>
+                <ion-col size="4">
+                    <ion-item (click)="hideElmt('followers')">Followers({{ profile.followers ? profile.followers.length : 0 }})
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+        <div *ngIf="post === 'unhide'">
+            <!-- <ion-card *ngFor="let post of profile.posts">
         <ion-card-content>
           {{ post.caption }}
         </ion-card-content>
       </ion-card> -->
-      <ion-card *ngFor="let post of profile.posts; let i = index">
-        <ion-item>
-          <ion-avatar slot="start" style="width: 30px; height: 30px">
-            <img
-              src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y"
-            />
-          </ion-avatar>
-          <ion-label>
-            <h3>{{ post.username }}</h3>
-            <p>{{ post.uploaded_at }}</p>
-          </ion-label>
-        </ion-item>
-        <img src="https://ionicframework.com/docs/demos/api/card/madison.jpg" />
-        <ion-card-header> </ion-card-header>
+            <ion-card *ngFor="let post of profile.posts; let i = index">
+                <ion-item>
+                    <ion-avatar slot="start" style="width: 30px; height: 30px">
+                        <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y" />
+                    </ion-avatar>
+                    <ion-label>
+                        <h3>{{ post.username }}</h3>
+                        <p>{{ post.uploaded_at }}</p>
+                    </ion-label>
+                </ion-item>
+                <img src="https://ionicframework.com/docs/demos/api/card/madison.jpg" />
+                <ion-card-header> </ion-card-header>
 
-        <ion-card-content>
-          <p>{{ post.caption }}</p>
-        </ion-card-content>
+                <ion-card-content>
+                    <p>{{ post.caption }}</p>
+                </ion-card-content>
 
-        <ion-footer>
-          <ion-grid>
-            <ion-row>
-              <ion-col class="ion-align-self-center ion-text-center">
-                <div
-                  *ngIf="status[post.idpost] != 'liked'"
-                  (click)="like(post.idpost)"
-                >
-                  <ion-icon name="heart-outline"></ion-icon>
-                </div>
-                <div
-                  *ngIf="status[post.idpost] == 'liked'"
-                  (click)="unlike(post.idpost)"
-                >
-                  <ion-icon name="heart"></ion-icon>
-                </div>
-              </ion-col>
-              <ion-col
-                class="ion-align-self-center ion-text-center"
-                routerLink="/detailpost/{{ post.idpost }}"
-              >
-                <h2></h2>
-                <p>Comments</p>
-              </ion-col>
-              <ion-col class="ion-align-self-center ion-text-center">
-                <ion-icon name="bookmark-outline"></ion-icon>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-footer>
-      </ion-card>
+                <ion-footer>
+                    <ion-grid>
+                        <ion-row>
+                            <ion-col class="ion-align-self-center ion-text-center">
+                                <div *ngIf="status[post.idpost] !== 'liked'" (click)="like(post.idpost)">
+                                    <ion-icon name="heart-outline"></ion-icon>
+                                </div>
+                                <div *ngIf="status[post.idpost] === 'liked'" (click)="unlike(post.idpost)">
+                                    <ion-icon name="heart"></ion-icon>
+                                </div>
+                            </ion-col>
+                            <ion-col class="ion-align-self-center ion-text-center" routerLink="/detailpost/{{ post.idpost }}">
+                                <h2></h2>
+                                <p>Comments</p>
+                            </ion-col>
+                            <ion-col class="ion-align-self-center ion-text-center">
+                                <ion-icon name="bookmark-outline"></ion-icon>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </ion-footer>
+            </ion-card>
+        </div>
+        <!-- following -->
+        <ion-card *ngIf="following === 'unhide'">
+            <ion-list>
+                <ion-item *ngFor="let pro of profile.following">
+                    <ion-chip>{{ pro.following }}</ion-chip>
+                </ion-item>
+            </ion-list>
+        </ion-card>
+        <ion-card *ngIf="followers === 'unhide'">
+            <ion-list>
+                <ion-item *ngFor="let pro of profile.followers">
+                    <ion-chip>{{ pro.followers }}</ion-chip>
+                </ion-item>
+            </ion-list>
+        </ion-card>
     </div>
-    <!-- following -->
-    <ion-card *ngIf="following == 'unhide'">
-      <ion-list>
-        <ion-item *ngFor="let pro of profile.following">
-          <ion-chip>{{ pro.following }}</ion-chip>
-        </ion-item>
-      </ion-list>
-    </ion-card>
-    <ion-card *ngIf="followers == 'unhide'">
-      <ion-list>
-        <ion-item *ngFor="let pro of profile.followers">
-          <ion-chip>{{ pro.followers }}</ion-chip>
-        </ion-item>
-      </ion-list>
-    </ion-card>
-  </div>
 </ion-content>

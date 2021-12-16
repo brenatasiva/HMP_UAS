@@ -20,10 +20,11 @@ export class PostService {
     );
   }
 
-  insertPost(post: PostModel): Observable<any> {
+  insertPost(caption: string, username: string, url: string): Observable<any> {
     let body = new HttpParams();
-    body = body.set('caption', post.caption);
-    body = body.set('username', post.username);
+    body = body.set('caption', caption);
+    body = body.set('username', username);
+    body = body.set('url', url);
     return this.http.post(
       'https://ubaya.fun/hybrid/160419144/hmp_uas/posts/insertpost.php',
       body

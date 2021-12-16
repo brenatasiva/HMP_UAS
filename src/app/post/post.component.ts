@@ -1,7 +1,9 @@
+/* eslint-disable eqeqeq */
 import { Component, OnInit, Input } from '@angular/core';
 import { PostService } from '../post.service';
 import { PostModel } from '../post.model';
 import { Storage } from '@ionic/storage-angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-post',
@@ -34,15 +36,15 @@ export class PostComponent implements OnInit {
 
   like(id: number) {
     this.ps.insertAction('Like', null, id, this.username).subscribe((data) => {
-      if (data.result == 'success') this.status[id] = 'liked';
-      else console.log(data.message);
+      if (data.result == 'success') {this.status[id] = 'liked';}
+      else {console.log(data.message);}
     });
   }
 
   unlike(id: number) {
     this.ps.deleteAction('Like', id, this.username, null).subscribe((data) => {
-      if (data.result == 'success') this.status[id] = '';
-      else console.log(data.message);
+      if (data.result == 'success') {this.status[id] = '';}
+      else {console.log(data.message);}
     });
   }
 

@@ -1,3 +1,5 @@
+/* eslint-disable eqeqeq */
+/* eslint-disable @typescript-eslint/member-ordering */
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
 import { Storage } from '@ionic/storage-angular';
@@ -49,7 +51,7 @@ export class ProfileComponent implements OnInit {
   showProfile() {
     this.u.showProfile(this.username).subscribe((data) => {
       this.profile = data.data;
-      this.profile['posts'].forEach((post) => {
+      this.profile["posts"].forEach((post) => {
         this.status[post.idpost] = post.status;
       });
       console.log(this.profile);
@@ -58,15 +60,15 @@ export class ProfileComponent implements OnInit {
 
   like(id: number) {
     this.ps.insertAction('Like', null, id, this.username).subscribe((data) => {
-      if (data.result == 'success') this.status[id] = 'liked';
-      else console.log(data.message);
+      if (data.result == 'success') {this.status[id] = 'liked';}
+      else {console.log(data.message);}
     });
   }
 
   unlike(id: number) {
     this.ps.deleteAction('Like', id, this.username, null).subscribe((data) => {
-      if (data.result == 'success') this.status[id] = '';
-      else console.log(data.message);
+      if (data.result == 'success') {this.status[id] = '';}
+      else {console.log(data.message);}
     });
   }
 }
