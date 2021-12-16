@@ -16,7 +16,10 @@ if (isset($username)) {
     $stmt->execute();
     if ($stmt->affected_rows > 0) {
         //Jika user juga mengupdate profile picture
-        if ($url != "") {
+        if ($url != "" || str_contains($url, 'data:image/jpeg;base64')) {
+            if (file_exists("images/" . $username . ".jpg")) {
+                @unlink("images/" . $username . ".jpg");
+            }
             $img = str_replace('data:image/jpeg;base64,', '', $url);
             $img = str_replace(' ', '+', $img);
             $data = base64_decode($img);

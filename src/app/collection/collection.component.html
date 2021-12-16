@@ -1,21 +1,39 @@
-<ion-card *ngFor="let c of collections; let i = index">
-  <ion-card-content routerLink="/detailcollection/{{ c.idcollection }}">
-    <ion-grid>
-      <ion-row>
-        <ion-col size="3" class="ion-align-self-center ion-text-center"
-          ><ion-icon name="library" size="large"></ion-icon
-        ></ion-col>
-        <ion-col>
-          <h2>{{ c.nama_collection }}</h2>
-          <p>Made by {{ c.username }}</p>
-        </ion-col>
-        <ion-col size="3" class="ion-align-self-center ion-text-center">
-          <h2>
-            <b>{{ c.idcollection }}</b>
-          </h2>
-          <p>post(s)</p>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-card-content>
-</ion-card>
+<ion-content *ngIf="collections.length > 0">
+  <ion-card *ngFor="let c of collections; let i = index">
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="3" class="ion-align-self-center ion-text-center"
+            ><ion-icon name="library" size="large"></ion-icon
+          ></ion-col>
+          <ion-col routerLink="/detailcollection/{{ c.idcollection }}">
+            <h2>{{ c.nama_collection }}</h2>
+            <p>
+              Made by {{ c.username }} - <b>{{ c.jumlah }}</b> post(s)
+            </p>
+          </ion-col>
+          <ion-col size="3" class="ion-align-self-center ion-text-center">
+            <ion-icon
+              *ngIf="username === c.username"
+              name="trash"
+              size="large"
+              (click)="deleteCollection(c.idcollection)"
+            ></ion-icon>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+<ion-content *ngIf="collections.length <= 0">
+  <ion-text class="ion-text-center ion-no-padding">
+    <h3>There is no collections. Go add some collection!</h3>
+  </ion-text>
+</ion-content>
+
+<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab-button routerLink="/formcollection">
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+</ion-fab>

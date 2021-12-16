@@ -20,21 +20,30 @@ export class PostService {
     );
   }
 
-  insertPost(post: PostModel): Observable<any> {
+  getPost(idpost: number): Observable<any> {
     let body = new HttpParams();
-    body = body.set('caption', post.caption);
-    body = body.set('username', post.username);
-    body = body.set('date', post.date);
-    body = body.set('url', post.url);
+    body = body.set('idpost', idpost);
+    return this.http.post(
+      'https://ubaya.fun/hybrid/160419144/hmp_uas/posts/getpost.php',
+      body
+    );
+  }
+
+  insertPost(caption: string, username: string, url: string): Observable<any> {
+    let body = new HttpParams();
+    body = body.set('caption', caption);
+    body = body.set('username', username);
+    body = body.set('url', url);
     return this.http.post(
       'https://ubaya.fun/hybrid/160419144/hmp_uas/posts/insertpost.php',
       body
     );
   }
 
-  detailPost(idpost: number): Observable<any> {
+  detailPost(idpost: number, username: string): Observable<any> {
     let body = new HttpParams();
     body = body.set('idpost', idpost);
+    body = body.set('username', username);
     return this.http.post(
       'https://ubaya.fun/hybrid/160419144/hmp_uas/posts/detailpost.php',
       body
@@ -50,9 +59,10 @@ export class PostService {
     );
   }
 
-  editPost(idpost: number): Observable<any> {
+  editPost(idpost: number, caption: string): Observable<any> {
     let body = new HttpParams();
     body = body.set('idpost', idpost);
+    body = body.set('caption', caption);
     return this.http.post(
       'https://ubaya.fun/hybrid/160419144/hmp_uas/posts/editpost.php',
       body

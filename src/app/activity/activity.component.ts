@@ -12,7 +12,7 @@ export class ActivityComponent implements OnInit {
 
   activity = [];
 
-  constructor(public u: UserService, private storage: Storage) { }
+  constructor(public u: UserService, private storage: Storage) {}
 
   async ngOnInit() {
     await this.storage.create();
@@ -21,12 +21,10 @@ export class ActivityComponent implements OnInit {
   }
 
   showActivity() {
-    this.u.showActivity(this.username).subscribe(
-      (data) => {
-        this.activity = data.data;
-        console.log(this.activity);
-      }
-    );
+    this.u.showActivity(this.username).subscribe((data) => {
+      this.activity = data.data;
+      console.log(this.activity);
+      console.log(this.activity[0].url);
+    });
   }
-
 }

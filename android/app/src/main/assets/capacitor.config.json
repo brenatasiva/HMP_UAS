@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "HMP_UAS",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}

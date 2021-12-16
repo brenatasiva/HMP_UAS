@@ -6,14 +6,18 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { SignupComponent } from './signup/signup.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ActivityComponent } from './activity/activity.component';
 import { CollectionComponent } from './collection/collection.component';
 import { DetailcollectionComponent } from './detailcollection/detailcollection.component';
+import { FormcollectionComponent } from './formcollection/formcollection.component';
 import { DetailpostComponent } from './detailpost/detailpost.component';
 import { PostComponent } from './post/post.component';
 import { SearchComponent } from './search/search.component';
+import { FormpostComponent } from './formpost/formpost.component';
+import { FormprofileComponent } from './formprofile/formprofile.component';
+import { EditpostComponent } from './editpost/editpost.component';
+import { CollectionpickerComponent } from './collectionpicker/collectionpicker.component';
 
 import { FormsModule } from '@angular/forms';
 
@@ -30,7 +34,6 @@ import { PostService } from './post.service';
 const appRoutes: Routes = [
   { path: 'home', component: PostComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'signup', component: SignupComponent },
   { path: 'detailpost/:idpost', component: DetailpostComponent },
   { path: 'search', component: SearchComponent },
   { path: 'profile/:username', component: ProfileComponent },
@@ -41,12 +44,35 @@ const appRoutes: Routes = [
     path: 'detailcollection/:idcollection',
     component: DetailcollectionComponent,
   },
+  {
+    path: 'formpost',
+    component: FormpostComponent,
+  },
+  {
+    path: 'edit/:username',
+    component: FormprofileComponent,
+  },
+  {
+    path: 'editpost/:id',
+    component: EditpostComponent,
+  },
+  {
+    path: 'formcollection',
+    component: FormcollectionComponent,
+  },
+  {
+    path: 'collectionpicker/:id',
+    component: CollectionpickerComponent,
+  },
+  {
+    path: 'formprofile/:username',
+    component: FormprofileComponent,
+  },
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    SignupComponent,
     PostComponent,
     DetailpostComponent,
     SearchComponent,
@@ -54,6 +80,12 @@ const appRoutes: Routes = [
     ActivityComponent,
     CollectionComponent,
     DetailcollectionComponent,
+    FormpostComponent,
+    FormprofileComponent,
+    EditpostComponent,
+    FormcollectionComponent,
+    CollectionpickerComponent,
+    FormprofileComponent,
   ],
   entryComponents: [],
   imports: [

@@ -1,0 +1,10 @@
+<ion-item>
+  <ion-label position="floating">Add a new collection's name</ion-label>
+  <ion-textarea
+    (input)="checkCollectionName($event)"
+    [(ngModel)]="nama_collection"
+  ></ion-textarea>
+</ion-item>
+<ion-button expand="block" [disabled]="disabled" (click)="save()"
+  >Create
+</ion-button>

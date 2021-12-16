@@ -1,50 +1,82 @@
-<ion-card *ngFor="let post of posts">
-  <ion-item>
-    <ion-avatar slot="start" style="width: 30px; height: 30px">
-      <img
-        src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y"
-      />
-    </ion-avatar>
-    <ion-label>
-      <h3>{{ post.username }}</h3>
-      <p>{{ post.uploaded_at }}</p>
-    </ion-label>
-  </ion-item>
-  <img src="https://ionicframework.com/docs/demos/api/card/madison.jpg" />
-  <ion-card-header> </ion-card-header>
+<ion-content>
+  <ion-card *ngFor="let post of posts">
+    <ion-item>
+      <ion-avatar
+        slot="start"
+        style="width: 30px; height: 30px"
+        routerLink="/profile/{{ post.username }}"
+      >
+        <img
+          *ngIf="post.usernameUrl === null"
+          src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y"
+        />
+        <img
+          *ngIf="post.usernameUrl !== null"
+          src="https://ubaya.fun/hybrid/160419144/hmp_uas/users/images/{{
+            post.usernameUrl
+          }}"
+        />
+      </ion-avatar>
+      <ion-label>
+        <h3>{{ post.username }}</h3>
+        <p>{{ post.uploaded_at }}</p>
+      </ion-label>
+    </ion-item>
+    <img
+      *ngIf="post.url !== null"
+      src="https://ubaya.fun/hybrid/160419144/hmp_uas/posts/images/{{
+        post.url
+      }}"
+    />
 
-  <ion-card-content>
-    <p>{{ post.caption }}</p>
-  </ion-card-content>
+    <ion-card-content>
+      <p *ngIf="post.caption.length <= 200">{{ post.caption }}</p>
+      <p
+        *ngIf="post.caption.length > 200"
+        routerLink="/detailpost/{{ post.idpost }}"
+      >
+        {{ trimString(post.caption, 200) }}
+      </p>
+    </ion-card-content>
 
-  <ion-footer>
-    <ion-grid>
-      <ion-row>
-        <ion-col class="ion-align-self-center ion-text-center">
-          <div
-            *ngIf="status[post.idpost] != 'liked'"
-            (click)="like(post.idpost)"
+    <ion-footer>
+      <ion-grid>
+        <ion-row>
+          <ion-col class="ion-align-self-center ion-text-center">
+            <div
+              *ngIf="status[post.idpost] !== 'liked'"
+              (click)="like(post.idpost)"
+            >
+              <ion-icon size="large" name="heart-outline"></ion-icon>
+            </div>
+            <div
+              *ngIf="status[post.idpost] === 'liked'"
+              (click)="unlike(post.idpost)"
+            >
+              <ion-icon size="large" name="heart"></ion-icon>
+            </div>
+          </ion-col>
+          <ion-col
+            class="ion-align-self-center ion-text-center"
+            routerLink="/detailpost/{{ post.idpost }}"
           >
-            <ion-icon name="heart-outline"></ion-icon>
-          </div>
-          <div
-            *ngIf="status[post.idpost] == 'liked'"
-            (click)="unlike(post.idpost)"
-          >
-            <ion-icon name="heart"></ion-icon>
-          </div>
-        </ion-col>
-        <ion-col
-          class="ion-align-self-center ion-text-center"
-          routerLink="/detailpost/{{ post.idpost }}"
-        >
-          <h2></h2>
-          <p>Comments</p>
-        </ion-col>
-        <ion-col class="ion-align-self-center ion-text-center">
-          <ion-icon name="bookmark-outline"></ion-icon>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-footer>
-</ion-card>
+            <ion-icon size="large" name="chatbubble-outline"></ion-icon>
+          </ion-col>
+          <ion-col class="ion-align-self-center ion-text-center">
+            <ion-icon
+              size="large"
+              name="bookmark-outline"
+              routerLink="/collectionpicker/{{ post.idpost }}"
+            ></ion-icon>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-footer>
+  </ion-card>
+  <br /><br />
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button routerLink="/formpost">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

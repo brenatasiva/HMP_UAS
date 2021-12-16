@@ -3,17 +3,46 @@
     <ion-item style="margin-left: -15px; padding-bottom: 15px">
       <ion-avatar slot="start" style="width: 30px; height: 30px">
         <img
+          *ngIf="usernameUrl !== null"
+          src="https://ubaya.fun/hybrid/160419144/hmp_uas/users/images/{{
+            data.usernameUrl
+          }}"
+        />
+        <img
+          *ngIf="usernameUrl == null"
           src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y"
         />
       </ion-avatar>
-      <ion-label>{{ data.username }}</ion-label>
+      <ion-label>
+        <h3>{{ data.username }}</h3>
+        <p>{{ data.uploaded_at }}</p>
+      </ion-label>
     </ion-item>
-    <ion-img
-      src="https://ionicframework.com/docs/demos/api/card/madison.jpg"
-    ></ion-img>
-    <ion-card-title
-      ><ion-icon name="heart"></ion-icon> {{ likes }}</ion-card-title
-    >
+    <img
+      *ngIf="url !== null"
+      src="https://ubaya.fun/hybrid/160419144/hmp_uas/posts/images/{{ url }}"
+    />
+    <ion-grid>
+      <ion-row>
+        <ion-col class="ion-align-self-left ion-text-left">
+          <div *ngIf="status != 'liked'" (click)="like()">
+            <ion-icon size="large" name="heart-outline"></ion-icon>
+            <ion-label size="large">{{ likes }}</ion-label>
+          </div>
+          <div *ngIf="status == 'liked'" (click)="unlike()">
+            <ion-icon size="large" name="heart"></ion-icon>
+            <ion-label size="large">{{ likes }}</ion-label>
+          </div>
+        </ion-col>
+        <ion-col class="ion-align-self-right ion-text-right">
+          <ion-icon
+            size="large"
+            name="bookmark-outline"
+            routerLink="/collectionpicker/{{ id }}"
+          ></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </ion-card-header>
 
   <ion-card-content>
@@ -31,7 +60,14 @@
     <ion-item *ngFor="let comment of comments">
       <ion-avatar slot="start">
         <img
-          src="https://ionicframework.com/docs/demos/api/list/avatar-finn.png"
+          *ngIf="comment.url !== null"
+          src="https://ubaya.fun/hybrid/160419144/hmp_uas/users/images/{{
+            comment.url
+          }}"
+        />
+        <img
+          *ngIf="comment.url == null"
+          src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y"
         />
       </ion-avatar>
       <ion-label>
