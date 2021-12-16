@@ -20,6 +20,15 @@ export class PostService {
     );
   }
 
+  getPost(idpost: number): Observable<any> {
+    let body = new HttpParams();
+    body = body.set('idpost', idpost);
+    return this.http.post(
+      'https://ubaya.fun/hybrid/160419144/hmp_uas/posts/getpost.php',
+      body
+    );
+  }
+
   insertPost(caption: string, username: string, url: string): Observable<any> {
     let body = new HttpParams();
     body = body.set('caption', caption);
@@ -50,9 +59,10 @@ export class PostService {
     );
   }
 
-  editPost(idpost: number): Observable<any> {
+  editPost(idpost: number, caption: string): Observable<any> {
     let body = new HttpParams();
     body = body.set('idpost', idpost);
+    body = body.set('caption', caption);
     return this.http.post(
       'https://ubaya.fun/hybrid/160419144/hmp_uas/posts/editpost.php',
       body

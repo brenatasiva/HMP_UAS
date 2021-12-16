@@ -24,6 +24,8 @@ export class DetailpostComponent implements OnInit {
   id: number = 0;
   textComment = '';
   status = '';
+  url = '';
+  usernameUrl = '';
 
   async ngOnInit() {
     this.id = this.route.snapshot.params.idpost;
@@ -38,6 +40,8 @@ export class DetailpostComponent implements OnInit {
       this.likes = data.data.likes;
       this.comments = data.data.comments;
       this.status = data.data.status;
+      this.url = data.data.url;
+      this.usernameUrl = data.data.usernameUrl;
       console.log(data.data);
     });
   }

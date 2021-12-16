@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage-angular';
 import { FormsModule } from '@angular/forms';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-formpost',
@@ -15,7 +16,6 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 export class FormpostComponent implements OnInit {
   username = '';
   caption = '';
-  url = '';
   disabled = true;
   postUrl = '';
 
@@ -29,11 +29,14 @@ export class FormpostComponent implements OnInit {
   }
 
   addPost() {
-    this.ps.insertPost(this.caption, this.username, this.url).subscribe(
-      (data) => {
-        alert(data.status);
-      }
-    );
+    this.ps
+      .insertPost(this.caption, this.username, this.postUrl)
+      .subscribe((data) => {
+        if (data.result == 'success') {
+          this.presentAlert();
+          this.router.navigate(['/home']);
+        }
+      });
   }
 
   options: CameraOptions = {
@@ -41,8 +44,8 @@ export class FormpostComponent implements OnInit {
     destinationType: this.camera.DestinationType.DATA_URL,
     encodingType: this.camera.EncodingType.JPEG,
     mediaType: this.camera.MediaType.PICTURE,
-    sourceType: this.camera.PictureSourceType.CAMERA, //bisa diganti PHOTOLIBRARY jika ingin mengambil foto dari gallery
-    saveToPhotoAlbum: true
+    sourceType: this.camera.PictureSourceType.PHOTOLIBRARY, //bisa diganti PHOTOLIBRARY jika ingin mengambil foto dari gallery
+    saveToPhotoAlbum: true,
   };
 
   ambilFoto() {
@@ -58,12 +61,30 @@ export class FormpostComponent implements OnInit {
     );
   }
 
-
-  constructor(public ps: PostService, public router: Router, private storage: Storage, public camera: Camera) { }
+  constructor(
+    public ps: PostService,
+    public router: Router,
+    private storage: Storage,
+    public camera: Camera,
+    public alertController: AlertController
+  ) {}
 
   async ngOnInit() {
     await this.storage.create();
     this.username = await this.storage.get('username');
   }
 
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Information!',
+      message: 'Berhasil upload post!',
+      buttons: ['OK'],
+    });
+
+    await alert.present();
+
+    const { role } = await alert.onDidDismiss();
+    console.log('onDidDismiss resolved with role', role);
+  }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-search',
@@ -7,12 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchComponent implements OnInit {
   search = '';
+  users = [];
 
   findUser(event) {
     const element = event.target as HTMLInputElement;
-    console.log(element);
+    this.getProfile(element.value);
   }
-  constructor() {}
+  constructor(public u: UserService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getProfile('');
+  }
+
+  getProfile(username: string) {
+    this.u.getProfile(username).subscribe((data) => {
+      this.users = data.data;
+    });
+  }
 }

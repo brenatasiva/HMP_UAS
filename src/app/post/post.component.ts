@@ -4,6 +4,8 @@ import { PostService } from '../post.service';
 import { PostModel } from '../post.model';
 import { Storage } from '@ionic/storage-angular';
 import { Router } from '@angular/router';
+import { ActionSheetController } from '@ionic/angular';
+import { CollectionService } from '../collection.service';
 
 @Component({
   selector: 'app-post',
@@ -15,8 +17,14 @@ export class PostComponent implements OnInit {
   statusMessage = 'Oops! There is no posts from the timeline.';
   posts = [];
   status = [];
+  collection = [];
 
-  constructor(public ps: PostService, private storage: Storage) {}
+  constructor(
+    public ps: PostService,
+    public cs: CollectionService,
+    private storage: Storage,
+    public actionSheetController: ActionSheetController
+  ) {}
 
   async ngOnInit() {
     await this.storage.create();
@@ -34,17 +42,29 @@ export class PostComponent implements OnInit {
     });
   }
 
+  trimString(string, length) {
+    return string.length > length
+      ? string.substring(0, length) + ' ...Show More'
+      : string;
+  }
+
   like(id: number) {
     this.ps.insertAction('Like', null, id, this.username).subscribe((data) => {
-      if (data.result == 'success') {this.status[id] = 'liked';}
-      else {console.log(data.message);}
+      if (data.result == 'success') {
+        this.status[id] = 'liked';
+      } else {
+        console.log(data.message);
+      }
     });
   }
 
   unlike(id: number) {
     this.ps.deleteAction('Like', id, this.username, null).subscribe((data) => {
-      if (data.result == 'success') {this.status[id] = '';}
-      else {console.log(data.message);}
+      if (data.result == 'success') {
+        this.status[id] = '';
+      } else {
+        console.log(data.message);
+      }
     });
   }
 

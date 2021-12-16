@@ -29,7 +29,8 @@ export class AppComponent implements OnInit {
   signEmail = '';
   signLokasi = '';
   signBio = '';
-  signUrl = '';
+  signUrl =
+    'https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y';
   statusSignUp = '';
 
   options: CameraOptions = {
@@ -38,7 +39,7 @@ export class AppComponent implements OnInit {
     encodingType: this.camera.EncodingType.JPEG,
     mediaType: this.camera.MediaType.PICTURE,
     sourceType: this.camera.PictureSourceType.CAMERA, //bisa diganti PHOTOLIBRARY jika ingin mengambil foto dari gallery
-    saveToPhotoAlbum: true
+    saveToPhotoAlbum: true,
   };
 
   changeSignUp() {
@@ -61,7 +62,11 @@ export class AppComponent implements OnInit {
       }
     );
   }
-  constructor(private storage: Storage, public u: UserService, public camera: Camera) { }
+  constructor(
+    private storage: Storage,
+    public u: UserService,
+    public camera: Camera
+  ) {}
 
   async ngOnInit() {
     await this.storage.create();
@@ -83,10 +88,23 @@ export class AppComponent implements OnInit {
   }
 
   signup() {
-    if (this.signUsername.length > 0 && this.signPassword.length > 0 && this.signGender.length > 0
-      && this.signTanggal.length > 0 && this.signEmail.length > 0) {
-      let user: UserModel = new UserModel(this.signUsername, this.signName, this.signGender, this.signPassword,
-        this.signTanggal, this.signEmail, this.signLokasi, this.signBio);
+    if (
+      this.signUsername.length > 0 &&
+      this.signPassword.length > 0 &&
+      this.signGender.length > 0 &&
+      this.signTanggal.length > 0 &&
+      this.signEmail.length > 0
+    ) {
+      let user: UserModel = new UserModel(
+        this.signUsername,
+        this.signName,
+        this.signGender,
+        this.signPassword,
+        this.signTanggal,
+        this.signEmail,
+        this.signLokasi,
+        this.signBio
+      );
       this.u.signUp(user, this.signUrl).subscribe((data) => {
         if (data.result === 'success') {
           alert('Successfully signed up your account!');
@@ -106,9 +124,8 @@ export class AppComponent implements OnInit {
         }
       });
     } else {
-      this.statusSignUp = 'You haven\'t finished filling the form yet.';
+      this.statusSignUp = "You haven't finished filling the form yet.";
     }
-
   }
 
   async logout() {

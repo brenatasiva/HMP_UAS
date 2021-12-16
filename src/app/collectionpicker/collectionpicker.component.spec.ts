@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { DetailfollowComponent } from './detailfollow.component';
+import { CollectionpickerComponent } from './collectionpicker.component';
 
-describe('DetailfollowComponent', () => {
-  let component: DetailfollowComponent;
-  let fixture: ComponentFixture<DetailfollowComponent>;
+describe('CollectionpickerComponent', () => {
+  let component: CollectionpickerComponent;
+  let fixture: ComponentFixture<CollectionpickerComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ DetailfollowComponent ],
+      declarations: [ CollectionpickerComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(DetailfollowComponent);
+    fixture = TestBed.createComponent(CollectionpickerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

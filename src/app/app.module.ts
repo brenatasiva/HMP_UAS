@@ -10,10 +10,14 @@ import { ProfileComponent } from './profile/profile.component';
 import { ActivityComponent } from './activity/activity.component';
 import { CollectionComponent } from './collection/collection.component';
 import { DetailcollectionComponent } from './detailcollection/detailcollection.component';
+import { FormcollectionComponent } from './formcollection/formcollection.component';
 import { DetailpostComponent } from './detailpost/detailpost.component';
 import { PostComponent } from './post/post.component';
 import { SearchComponent } from './search/search.component';
 import { FormpostComponent } from './formpost/formpost.component';
+import { FormprofileComponent } from './formprofile/formprofile.component';
+import { EditpostComponent } from './editpost/editpost.component';
+import { CollectionpickerComponent } from './collectionpicker/collectionpicker.component';
 
 import { FormsModule } from '@angular/forms';
 
@@ -44,6 +48,26 @@ const appRoutes: Routes = [
     path: 'formpost',
     component: FormpostComponent,
   },
+  {
+    path: 'edit/:username',
+    component: FormprofileComponent,
+  },
+  {
+    path: 'editpost/:id',
+    component: EditpostComponent,
+  },
+  {
+    path: 'formcollection',
+    component: FormcollectionComponent,
+  },
+  {
+    path: 'collectionpicker/:id',
+    component: CollectionpickerComponent,
+  },
+  {
+    path: 'formprofile/:username',
+    component: FormprofileComponent,
+  },
 ];
 
 @NgModule({
@@ -56,7 +80,12 @@ const appRoutes: Routes = [
     ActivityComponent,
     CollectionComponent,
     DetailcollectionComponent,
-    FormpostComponent
+    FormpostComponent,
+    FormprofileComponent,
+    EditpostComponent,
+    FormcollectionComponent,
+    CollectionpickerComponent,
+    FormprofileComponent,
   ],
   entryComponents: [],
   imports: [
