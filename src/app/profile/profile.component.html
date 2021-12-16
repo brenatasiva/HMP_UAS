@@ -3,18 +3,11 @@
     <div class="header">
       <div class="avatar">
         <ion-avatar>
-          <img
-            *ngIf="profile.url === null"
-            src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y"
-            alt=""
-          />
-          <img
-            *ngIf="profile.url !== null"
-            src="https://ubaya.fun/hybrid/160419144/hmp_uas/users/images/{{
-              profile.url
-            }}"
-            alt=""
-          />
+          <img *ngIf="profile.url === null"
+            src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y" alt="" />
+          <img *ngIf="profile.url !== null" src="https://ubaya.fun/hybrid/160419144/hmp_uas/users/images/{{
+              profile.username
+            }}" alt="" />
         </ion-avatar>
       </div>
       <ion-text color="dark">
@@ -27,38 +20,24 @@
         <h5 style="text-align: center">{{ profile.bio }}</h5>
       </ion-text>
       <section *ngIf="username !== user" class="ion-margin-horizontal">
-        <ion-button
-          expand="block"
-          *ngIf="doesFollowThem"
-          color="success"
-          (click)="unfollow()"
-          >Following</ion-button
-        >
-        <ion-button expand="block" *ngIf="!doesFollowThem" (click)="follow()"
-          >Follow</ion-button
-        >
+        <ion-button expand="block" *ngIf="doesFollowThem" color="success" (click)="unfollow()">Following</ion-button>
+        <ion-button expand="block" *ngIf="!doesFollowThem" (click)="follow()">Follow</ion-button>
       </section>
       <section *ngIf="username == user">
-        <ion-button expand="block" routerLink="/formprofile/{{ username }}"
-          >Edit Profile</ion-button
-        >
+        <ion-button expand="block" routerLink="/formprofile/{{ username }}">Edit Profile</ion-button>
       </section>
     </div>
     <ion-grid>
       <ion-row>
         <ion-col size="4">
-          <ion-item (click)="hideElmt('post')"
-            >Posts({{ profile.posts ? profile.posts.length : "" }})</ion-item
-          >
+          <ion-item (click)="hideElmt('post')">Posts({{ profile.posts ? profile.posts.length : "" }})</ion-item>
         </ion-col>
         <ion-col size="4">
-          <ion-item (click)="hideElmt('following')"
-            >Following({{ profile.following ? profile.following.length : 0 }})
+          <ion-item (click)="hideElmt('following')">Following({{ profile.following ? profile.following.length : 0 }})
           </ion-item>
         </ion-col>
         <ion-col size="4">
-          <ion-item (click)="hideElmt('followers')"
-            >Followers({{ profile.followers ? profile.followers.length : 0 }})
+          <ion-item (click)="hideElmt('followers')">Followers({{ profile.followers ? profile.followers.length : 0 }})
           </ion-item>
         </ion-col>
       </ion-row>
@@ -67,43 +46,27 @@
       <ion-card *ngFor="let post of profile.posts; let i = index">
         <ion-item>
           <ion-avatar slot="start" style="width: 30px; height: 30px">
-            <img
-              *ngIf="profile.url === null"
-              src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y"
-              alt=""
-            />
-            <img
-              *ngIf="profile.url !== null"
-              src="https://ubaya.fun/hybrid/160419144/hmp_uas/users/images/{{
+            <img *ngIf="profile.url === null"
+              src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y" alt="" />
+            <img *ngIf="profile.url !== null" src="https://ubaya.fun/hybrid/160419144/hmp_uas/users/images/{{
                 profile.username
-              }}"
-              alt=""
-            />
+              }}" alt="" />
           </ion-avatar>
           <ion-label>
             <h3>{{ post.username }}</h3>
             <p>{{ post.uploaded_at }}</p>
           </ion-label>
-          <ion-label class="ion-align-self-right ion-text-right"
-            ><ion-icon
-              *ngIf="user == profile.username"
-              name="ellipsis-vertical-outline"
-              (click)="presentActionSheet(post.idpost)"
-            ></ion-icon
-          ></ion-label>
+          <ion-label class="ion-align-self-right ion-text-right">
+            <ion-icon *ngIf="user == profile.username" name="ellipsis-vertical-outline"
+              (click)="presentActionSheet(post.idpost)"></ion-icon>
+          </ion-label>
         </ion-item>
-        <img
-          *ngIf="post.url !== null"
-          src="https://ubaya.fun/hybrid/160419144/hmp_uas/posts/images/{{
+        <img *ngIf="post.url !== null" src="https://ubaya.fun/hybrid/160419144/hmp_uas/posts/images/{{
             post.url
-          }}"
-        />
+          }}" />
         <ion-card-content>
           <p *ngIf="post.caption.length <= 200">{{ post.caption }}</p>
-          <p
-            *ngIf="post.caption.length > 200"
-            routerLink="/detailpost/{{ post.idpost }}"
-          >
+          <p *ngIf="post.caption.length > 200" routerLink="/detailpost/{{ post.idpost }}">
             {{ trimString(post.caption, 200) }}
           </p>
         </ion-card-content>
@@ -112,31 +75,19 @@
           <ion-grid>
             <ion-row>
               <ion-col class="ion-align-self-center ion-text-center">
-                <div
-                  *ngIf="status[post.idpost] !== 'liked'"
-                  (click)="like(post.idpost)"
-                >
+                <div *ngIf="status[post.idpost] !== 'liked'" (click)="like(post.idpost)">
                   <ion-icon size="large" name="heart-outline"></ion-icon>
                 </div>
-                <div
-                  *ngIf="status[post.idpost] === 'liked'"
-                  (click)="unlike(post.idpost)"
-                >
+                <div *ngIf="status[post.idpost] === 'liked'" (click)="unlike(post.idpost)">
                   <ion-icon size="large" name="heart"></ion-icon>
                 </div>
               </ion-col>
-              <ion-col
-                class="ion-align-self-center ion-text-center"
-                routerLink="/detailpost/{{ post.idpost }}"
-              >
+              <ion-col class="ion-align-self-center ion-text-center" routerLink="/detailpost/{{ post.idpost }}">
                 <ion-icon size="large" name="chatbubble-outline"></ion-icon>
               </ion-col>
               <ion-col class="ion-align-self-center ion-text-center">
-                <ion-icon
-                  size="large"
-                  name="bookmark-outline"
-                  routerLink="/collectionpicker/{{ post.idpost }}"
-                ></ion-icon>
+                <ion-icon size="large" name="bookmark-outline" routerLink="/collectionpicker/{{ post.idpost }}">
+                </ion-icon>
               </ion-col>
             </ion-row>
           </ion-grid>
@@ -151,16 +102,11 @@
             <ion-row>
               <ion-col size="3">
                 <ion-avatar style="width: 50px; height: 50px">
-                  <img
-                    *ngIf="pro.url === null"
-                    src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y"
-                  />
-                  <img
-                    *ngIf="pro.url !== null"
-                    src="https://ubaya.fun/hybrid/160419144/hmp_uas/users/images/{{
+                  <img *ngIf="pro.url === null"
+                    src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y" />
+                  <img *ngIf="pro.url !== null" src="https://ubaya.fun/hybrid/160419144/hmp_uas/users/images/{{
                       pro.url
-                    }}"
-                  />
+                    }}" />
                 </ion-avatar>
               </ion-col>
               <ion-col>
@@ -184,16 +130,11 @@
             <ion-row>
               <ion-col size="3">
                 <ion-avatar style="width: 50px; height: 50px">
-                  <img
-                    *ngIf="pro.url === null"
-                    src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y"
-                  />
-                  <img
-                    *ngIf="pro.url !== null"
-                    src="https://ubaya.fun/hybrid/160419144/hmp_uas/users/images/{{
+                  <img *ngIf="pro.url === null"
+                    src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y" />
+                  <img *ngIf="pro.url !== null" src="https://ubaya.fun/hybrid/160419144/hmp_uas/users/images/{{
                       pro.url
-                    }}"
-                  />
+                    }}" />
                 </ion-avatar>
               </ion-col>
               <ion-col>
