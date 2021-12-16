@@ -1,4 +1,4 @@
-package io.ionic.starter;
+package com.hmp.uas;
 
 import com.getcapacitor.BridgeActivity;
 

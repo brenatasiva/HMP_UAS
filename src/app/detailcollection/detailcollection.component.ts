@@ -74,6 +74,7 @@ export class DetailcollectionComponent implements OnInit {
   detailCollection(id) {
     this.c.detailCollection(id).subscribe((data) => {
       this.posts = data.data;
+      console.log(this.posts);
       this.nama_collection =
         this.posts[0] != null ? this.posts[0].nama_collection : null;
       this.pembuat = this.posts[0] != null ? this.posts[0].pembuat : null;

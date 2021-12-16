@@ -29,18 +29,7 @@ export class AppComponent implements OnInit {
   signEmail = '';
   signLokasi = '';
   signBio = '';
-  signUrl =
-    'https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y';
   statusSignUp = '';
-
-  options: CameraOptions = {
-    quality: 100,
-    destinationType: this.camera.DestinationType.DATA_URL,
-    encodingType: this.camera.EncodingType.JPEG,
-    mediaType: this.camera.MediaType.PICTURE,
-    sourceType: this.camera.PictureSourceType.CAMERA, //bisa diganti PHOTOLIBRARY jika ingin mengambil foto dari gallery
-    saveToPhotoAlbum: true,
-  };
 
   changeSignUp() {
     this.signUp = 'signUp';
@@ -50,18 +39,6 @@ export class AppComponent implements OnInit {
     this.signUp = '';
   }
 
-  ambilFoto() {
-    this.camera.getPicture(this.options).then(
-      (imageData) => {
-        let base64Image = 'data:image/jpeg;base64,' + imageData;
-        this.signUrl = base64Image;
-      },
-      (err) => {
-        //kalau error
-        alert('Fail to retrieve the photo. Please try again.');
-      }
-    );
-  }
   constructor(
     private storage: Storage,
     public u: UserService,
@@ -105,7 +82,7 @@ export class AppComponent implements OnInit {
         this.signLokasi,
         this.signBio
       );
-      this.u.signUp(user, this.signUrl).subscribe((data) => {
+      this.u.signUp(user).subscribe((data) => {
         if (data.result === 'success') {
           alert('Successfully signed up your account!');
           this.signName = '';
@@ -116,7 +93,6 @@ export class AppComponent implements OnInit {
           this.signEmail = '';
           this.signLokasi = '';
           this.signBio = '';
-          this.signUrl = '';
           this.statusSignUp = '';
           this.signUp = '';
         } else {

@@ -1,45 +1,53 @@
-<ion-card *ngFor="let a of activity; let i = index">
-  <ion-card-content>
-    <ion-grid>
-      <ion-row>
-        <ion-col size="3">
-          <ion-avatar
-            style="width: 50px; height: 50px"
-            routerLink="/profile/{{ a.username }}"
-          >
-            <img
-              *ngIf="a.url === null"
-              src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y"
-            />
-            <img
-              *ngIf="a.url !== null"
-              src="https://ubaya.fun/hybrid/160419144/hmp_uas/users/images/{{
-                a.url
-              }}"
-            />
-          </ion-avatar>
-        </ion-col>
-        <ion-col>
-          <ion-card-title *ngIf="a.action == 'Like'">
-            <h3>
-              <b>{{ a.username }} liked one of your posts</b>
-            </h3>
-          </ion-card-title>
-          <ion-card-title *ngIf="a.action == 'Comment'">
-            <ion-text>
+<ion-content *ngIf="activity !== []">
+  <ion-card *ngFor="let a of activity; let i = index">
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="3">
+            <ion-avatar
+              style="width: 50px; height: 50px"
+              routerLink="/profile/{{ a.username }}"
+            >
+              <img
+                *ngIf="a.url === null"
+                src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y"
+              />
+              <img
+                *ngIf="a.url !== null"
+                src="https://ubaya.fun/hybrid/160419144/hmp_uas/users/images/{{
+                  a.url
+                }}"
+              />
+            </ion-avatar>
+          </ion-col>
+          <ion-col>
+            <ion-card-title *ngIf="a.action == 'Like'">
               <h3>
-                <b>{{ a.username }} commented on one of your posts</b>
+                <b>{{ a.username }} liked one of your posts</b>
               </h3>
-            </ion-text>
-            <ion-text>
-              <h3>
-                <i>"{{ a.comment }}"</i>
-              </h3>
-            </ion-text>
-          </ion-card-title>
-          <ion-card-subtitle>{{ a.action_at }}</ion-card-subtitle>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-card-content>
-</ion-card>
+            </ion-card-title>
+            <ion-card-title *ngIf="a.action == 'Comment'">
+              <ion-text>
+                <h3>
+                  <b>{{ a.username }} commented on one of your posts</b>
+                </h3>
+              </ion-text>
+              <ion-text>
+                <h3>
+                  <i>"{{ a.comment }}"</i>
+                </h3>
+              </ion-text>
+            </ion-card-title>
+            <ion-card-subtitle>{{ a.action_at }}</ion-card-subtitle>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+<ion-content *ngIf="activity == []">
+  <ion-text class="ion-text-center ion-no-padding">
+    <h3>There is no activity yet.</h3>
+  </ion-text>
+</ion-content>

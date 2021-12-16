@@ -29,7 +29,7 @@ export class UserService {
     );
   }
 
-  signUp(user: UserModel, url: string): Observable<any> {
+  signUp(user: UserModel): Observable<any> {
     let body = new HttpParams();
     body = body.set('username', user.username);
     body = body.set('nama', user.nama);
@@ -39,7 +39,6 @@ export class UserService {
     body = body.set('email', user.email);
     body = body.set('lokasi', user.lokasi);
     body = body.set('bio', user.bio);
-    body = body.set('url', url);
     return this.http.post(
       'https://ubaya.fun/hybrid/160419144/hmp_uas/users/signup.php',
       body

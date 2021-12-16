@@ -144,23 +144,6 @@
           </ion-input>
         </ion-item>
       </ion-list>
-      <ion-list>
-        <ion-list-header>
-          <ion-label>
-            <h4>Profile Picture (optional)</h4>
-          </ion-label>
-        </ion-list-header>
-        <ion-item>
-          <ion-img *ngIf="signUrl !== ''" src="{{ signUrl }}"> </ion-img>
-          <ion-img
-            *ngIf="signUrl == ''"
-            src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y"
-          ></ion-img>
-          <ion-button (click)="ambilFoto()">
-            <ion-icon name="camera"></ion-icon>
-          </ion-button>
-        </ion-item>
-      </ion-list>
       <ion-text class="ion-text-center">
         <p *ngIf="statusSignUp">
           <ion-chip>{{ statusSignUp }}</ion-chip>

@@ -6,9 +6,20 @@
 
   <ion-card *ngFor="let post of posts">
     <ion-item>
-      <ion-avatar slot="start" style="width: 30px; height: 30px">
+      <ion-avatar
+        slot="start"
+        style="width: 30px; height: 30px"
+        routerLink="/profile/{{ post.username }}"
+      >
         <img
+          *ngIf="post.usernameUrl === null"
           src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y"
+        />
+        <img
+          *ngIf="post.usernameUrl !== null"
+          src="https://ubaya.fun/hybrid/160419144/hmp_uas/users/images/{{
+            post.usernameurl
+          }}"
         />
       </ion-avatar>
       <ion-label>
@@ -23,12 +34,9 @@
       }}.jpg"
     />
 
-    <ion-card-content>
+    <ion-card-content routerLink="/detailpost/{{ post.idpost }}">
       <p *ngIf="post.caption.length <= 200">{{ post.caption }}</p>
-      <p
-        *ngIf="post.caption.length > 200"
-        routerLink="/detailpost/{{ post.idpost }}"
-      >
+      <p *ngIf="post.caption.length > 200">
         {{ trimString(post.caption, 200) }}
       </p>
     </ion-card-content>
@@ -36,7 +44,7 @@
     <ion-footer>
       <ion-grid>
         <ion-row>
-          <ion-col class="ion-align-self-center ion-text-center">
+          <!-- <ion-col class="ion-align-self-center ion-text-center">
             <div
               *ngIf="status[post.idpost] !== 'liked'"
               (click)="like(post.idpost)"
@@ -49,7 +57,7 @@
             >
               <ion-icon size="large" name="heart"></ion-icon>
             </div>
-          </ion-col>
+          </ion-col> -->
           <ion-col
             class="ion-align-self-center ion-text-center"
             routerLink="/detailpost/{{ post.idpost }}"
@@ -76,7 +84,7 @@
   </ion-card>
 </ion-content>
 
-<ion-content *ngIf="posts.length == 0">
+<ion-content *ngIf="posts.length <= 0">
   <ion-text class="ion-text-center ion-no-padding">
     <h3>There is no post in the collection.</h3>
   </ion-text>

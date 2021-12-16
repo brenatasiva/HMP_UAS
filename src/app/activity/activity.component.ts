@@ -23,8 +23,6 @@ export class ActivityComponent implements OnInit {
   showActivity() {
     this.u.showActivity(this.username).subscribe((data) => {
       this.activity = data.data;
-      console.log(this.activity);
-      console.log(this.activity[0].url);
     });
   }
 }

@@ -17,7 +17,7 @@ export class FormpostComponent implements OnInit {
   username = '';
   caption = '';
   disabled = true;
-  postUrl = '';
+  // postUrl = '';
 
   checkCaption(event: Event) {
     const element = event.target as HTMLInputElement;
@@ -29,43 +29,41 @@ export class FormpostComponent implements OnInit {
   }
 
   addPost() {
-    this.ps
-      .insertPost(this.caption, this.username, this.postUrl)
-      .subscribe((data) => {
-        if (data.result == 'success') {
-          this.presentAlert();
-          this.router.navigate(['/home']);
-        }
-      });
-  }
-
-  options: CameraOptions = {
-    quality: 100,
-    destinationType: this.camera.DestinationType.DATA_URL,
-    encodingType: this.camera.EncodingType.JPEG,
-    mediaType: this.camera.MediaType.PICTURE,
-    sourceType: this.camera.PictureSourceType.PHOTOLIBRARY, //bisa diganti PHOTOLIBRARY jika ingin mengambil foto dari gallery
-    saveToPhotoAlbum: true,
-  };
-
-  ambilFoto() {
-    this.camera.getPicture(this.options).then(
-      (imageData) => {
-        const base64Image = 'data:image/jpeg;base64,' + imageData;
-        this.postUrl = base64Image;
-      },
-      (err) => {
-        //kalau error
-        alert('Fail to retrieve the photo. Please try again.');
+    this.ps.insertPost(this.caption, this.username).subscribe((data) => {
+      if (data.result == 'success') {
+        this.presentAlert();
+        this.router.navigate(['/home']);
       }
-    );
+    });
   }
+
+  // options: CameraOptions = {
+  //   quality: 100,
+  //   destinationType: this.camera.DestinationType.DATA_URL,
+  //   encodingType: this.camera.EncodingType.JPEG,
+  //   mediaType: this.camera.MediaType.PICTURE,
+  //   sourceType: this.camera.PictureSourceType.PHOTOLIBRARY, //bisa diganti PHOTOLIBRARY jika ingin mengambil foto dari gallery
+  //   saveToPhotoAlbum: true,
+  // };
+
+  // ambilFoto() {
+  //   this.camera.getPicture(this.options).then(
+  //     (imageData) => {
+  //       const base64Image = 'data:image/jpeg;base64,' + imageData;
+  //       this.postUrl = base64Image;
+  //     },
+  //     (err) => {
+  //       //kalau error
+  //       alert('Fail to retrieve the photo. Please try again.');
+  //     }
+  //   );
+  // }
 
   constructor(
     public ps: PostService,
     public router: Router,
     private storage: Storage,
-    public camera: Camera,
+    // public camera: Camera,
     public alertController: AlertController
   ) {}
 
