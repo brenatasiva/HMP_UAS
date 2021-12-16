@@ -16,32 +16,6 @@ export class ProfileComponent implements OnInit {
   following = 'hide';
   followers = 'hide';
 
-<<<<<<< HEAD
-  post = 'unhide'
-  following = 'hide'
-  followers = 'hide'
-
-  hideElmt(hide) {
-    // this.post = 'hide'
-    if (hide == 'post') {
-      this.post = 'unhide'
-      this.following = 'hide'
-      this.followers = 'hide'
-    }
-    else if (hide == 'following') {
-      this.following = 'unhide'
-      this.followers = 'hide'
-      this.post = 'hide'
-    }
-    else if(hide == 'followers') {
-      this.followers = 'unhide'
-      this.following = 'hide' 
-      this.post = 'hide'
-    }
-  }
-
-  constructor(public u: UserService, private storage: Storage) { }
-=======
   status = [];
 
   hideElmt(hide) {
@@ -65,7 +39,6 @@ export class ProfileComponent implements OnInit {
     public u: UserService,
     private storage: Storage
   ) {}
->>>>>>> 3b73853183f3f76ed69b12a6f5a2bee4b87df9e2
 
   async ngOnInit() {
     await this.storage.create();
